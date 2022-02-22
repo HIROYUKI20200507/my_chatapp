@@ -12,23 +12,43 @@
         投稿
       </button>
     </form>
+    <div>
+      <a @click="logout">ユーザーの切替</a>
+    </div>
   </div>
 </template>
 
 <script>
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
+
 export default {
   data() {
     return {
       form: {
-        name: 'some user',
+        name: null,
         message: '',
       },
     }
+  },
+  mounted() {
+    const auth = getAuth()
+    onAuthStateChanged(auth, (user) => {
+      console.log(user)
+      if (user) {
+        this.form.name = user.displayName
+      }
+    })
   },
   methods: {
     async submit() {
       this.$store.commit('chat/ADD_MESSAGE', this.form)
       this.$router.push('/')
+    },
+    async logout() {
+      const auth = getAuth()
+
+      signOut(auth)
+      this.$router.push('/login')
     },
   },
 }

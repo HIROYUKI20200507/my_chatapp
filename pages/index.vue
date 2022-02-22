@@ -3,7 +3,11 @@
     <router-link class="btn btn-light" to="/form"> 投稿画面 </router-link>
     <br /><br />
     <ul class="list-group list-group-flush">
-      <li class="list-group-item" v-for="message in messages" :key="message">
+      <li
+        class="list-group-item"
+        v-for="(message, index) in messages"
+        :key="index"
+      >
         <div>
           {{ message.name }}
         </div>
