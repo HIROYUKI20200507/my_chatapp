@@ -20,6 +20,8 @@
 
 <script>
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
+import { collection, addDoc } from 'firebase/firestore'
+import { db } from '../plugins/firebase'
 
 export default {
   data() {
@@ -33,7 +35,6 @@ export default {
   mounted() {
     const auth = getAuth()
     onAuthStateChanged(auth, (user) => {
-      console.log(user)
       if (user) {
         this.form.name = user.displayName
       }
@@ -41,7 +42,8 @@ export default {
   },
   methods: {
     async submit() {
-      this.$store.commit('chat/ADD_MESSAGE', this.form)
+      const messagesCollectionRef = collection(db, 'messages')
+      addDoc(messagesCollectionRef, this.form)
       this.$router.push('/')
     },
     async logout() {
