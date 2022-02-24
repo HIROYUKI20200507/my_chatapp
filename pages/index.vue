@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div>github actions設定</div>
     <router-link class="btn btn-light" to="/form"> 投稿画面 </router-link>
     <br /><br />
     <ul class="list-group list-group-flush">
