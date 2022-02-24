@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@2
+        uses: actions/checkout@v2
       - name: setup Node
         uses: actions/setup-node@v2
         with:
