@@ -18,9 +18,9 @@ jobs:
         run: yarn
       - name: Build
         run: yarn run generate
-        # ↑ buildが違うコマンドなら、適宜変更して下さい
       - name: deploy to Firebase Hosting
         run: |
+          yarn add firebase-tools
           firebase deploy --token $FIREBASE_TOKEN
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
