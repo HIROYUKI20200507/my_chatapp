@@ -8,16 +8,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@master
+        uses: actions/checkout@2
       - name: setup Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
           node-version: 16.x
           registry-url: 'https://registry.npmjs.org'
       - name: Install Dependencies
         run: yarn
       - name: Build
-        run: yarn run generate
+        run: |
+          yarn run build
+          yarn run generate
       - name: deploy to Firebase Hosting
         run: |
           yarn add firebase-tools
