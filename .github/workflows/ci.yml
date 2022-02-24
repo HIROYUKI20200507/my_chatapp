@@ -22,6 +22,6 @@ jobs:
           yarn run generate
       - name: deploy to Firebase Hosting
         run: |
-          firebase deploy --token $FIREBASE_CI
+          firebase deploy --token $FIREBASE_TOKEN
         env:
-          FIREBASE_CI: ${{ secrets.FIREBASE_CI }}
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_CI }}
