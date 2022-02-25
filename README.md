@@ -1,5 +1,11 @@
 # my_chatapp
 
+# docker in
+
+$ docker compose up -d
+$ docker compose ps
+$ docker exec -it my_chatapp-app-1 sh
+
 ## Build Setup
 
 ```bash
