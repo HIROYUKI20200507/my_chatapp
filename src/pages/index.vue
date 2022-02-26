@@ -1,21 +1,38 @@
 <template>
   <div>
     <router-link class="btn btn-light" to="/form"> 投稿画面 </router-link>
-    <br /><br />
-    <ul class="list-group list-group-flush">
-      <li
-        class="list-group-item"
-        v-for="(message, index) in messages"
+    <template v-for="(message, index) in messages">
+      <!-- person - start -->
+      <div
+        class="flex flex-col sm:flex-row items-center gap-2 md:gap-4 m-3"
         :key="index"
       >
-        <div>
-          {{ message.name }}
+        <div
+          class="w-16 h-16 bg-gray-100 rounded-full overflow-hidden shadow-lg"
+        >
+          <img
+            :src="getPhoto(message.image)"
+            loading="lazy"
+            alt="Photo by christian ferrer"
+            class="w-full h-full object-cover object-center"
+          />
         </div>
+
         <div>
-          {{ message.message }}
+          <div
+            class="text-indigo-500 md:text-lg font-bold text-center sm:text-left"
+          >
+            {{ message.name }}
+          </div>
+          <p
+            class="text-gray-500 text-sm md:text-base text-center sm:text-left"
+          >
+            {{ message.message }}
+          </p>
         </div>
-      </li>
-    </ul>
+      </div>
+      <!-- person - end -->
+    </template>
   </div>
 </template>
 
@@ -27,6 +44,15 @@ export default {
   computed: {
     messages() {
       return this.$store.state.chat.messages
+    },
+  },
+  methods: {
+    getPhoto(img) {
+      if (img) return img
+      if (!img) {
+        // TODO:デフォルト画像を挿入
+        console.log('画像内')
+      }
     },
   },
   async mounted() {
