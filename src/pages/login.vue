@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a class="btn btn-light" @click="login"> ログイン </a>
+    <a class="text-3xl underline" @click="login"> ログイン </a>
   </div>
 </template>
 

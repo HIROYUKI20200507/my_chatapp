@@ -16,7 +16,6 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - name: Install Dependencies
         run: yarn
-        working-directory: ./src
       - name: Build
         run: |
           yarn run generate
