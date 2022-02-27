@@ -11,7 +11,7 @@
           class="w-16 h-16 bg-gray-100 rounded-full overflow-hidden shadow-lg"
         >
           <img
-            :src="getPhoto(message.image)"
+            :src="message.image"
             loading="lazy"
             alt="Photo by christian ferrer"
             class="w-full h-full object-cover object-center"
@@ -46,19 +46,7 @@ export default {
       return this.$store.state.chat.messages
     },
   },
-  methods: {
-    async getPhoto(img) {
-      if (img) return img
-      if (!img) {
-        // TODO:デフォルト画像を挿入
-        fetchSomething = () => {
-          const ip = this.$axios.$get('http://api.randomuser.me/')
-          this.ip = ip
-          console.log(ip)
-        }
-      }
-    },
-  },
+  methods: {},
   async mounted() {
     await this.$store.dispatch('chat/getMessages')
   },

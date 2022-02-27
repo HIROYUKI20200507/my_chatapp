@@ -3,6 +3,7 @@ export default {
     port: 3000,
     host: '0.0.0.0',
   },
+
   head: {
     title: 'my_chatapp',
     htmlAttrs: {
@@ -22,11 +23,21 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
     ],
   },
+
   css: ['@/assets/css/main.css'],
+
   plugins: [{ src: '~/plugins/firebase.js', ssr: false }],
+
   components: true,
+
   buildModules: ['@nuxt/postcss8'],
+
   modules: ['@nuxtjs/axios'],
+
+  axios: {
+    proxy: true,
+  },
+
   build: {
     postcss: {
       plugins: {
