@@ -27,3 +27,13 @@ export const actions = {
     commit('LOAD_MESSAGE', message)
   },
 }
+
+// TODO:Vuexでストアの管理が常時できるようになったら実装
+// export const getters = {
+//   user(state) {
+//     return state.user
+//   },
+//   isAuthenticated(state) {
+//     return !!state.user
+//   },
+// }

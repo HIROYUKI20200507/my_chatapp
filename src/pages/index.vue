@@ -47,11 +47,15 @@ export default {
     },
   },
   methods: {
-    getPhoto(img) {
+    async getPhoto(img) {
       if (img) return img
       if (!img) {
         // TODO:デフォルト画像を挿入
-        console.log('画像内')
+        fetchSomething = () => {
+          const ip = this.$axios.$get('http://api.randomuser.me/')
+          this.ip = ip
+          console.log(ip)
+        }
       }
     },
   },

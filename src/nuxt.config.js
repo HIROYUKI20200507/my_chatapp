@@ -3,7 +3,6 @@ export default {
     port: 3000,
     host: '0.0.0.0',
   },
-  // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'my_chatapp',
     htmlAttrs: {
@@ -23,23 +22,11 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
     ],
   },
-
-  // Global CSS: https://go.nuxtjs.dev/config-css
   css: ['@/assets/css/main.css'],
-
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [{ src: '~/plugins/firebase.js', ssr: false }],
-
-  // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
-
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: ['@nuxt/postcss8'],
-
-  // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [],
-
-  // Build Configuration: https://go.nuxtjs.dev/config-build
+  modules: ['@nuxtjs/axios'],
   build: {
     postcss: {
       plugins: {
@@ -48,8 +35,7 @@ export default {
       },
     },
   },
-
-  router: {
-    middleware: 'authenticated',
-  },
+  // router: {
+  //   middleware: 'authenticated',
+  // },
 }
