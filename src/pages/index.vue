@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <router-link class="btn btn-light" to="/form"> 投稿画面 </router-link>
+  <div class="mt-10 mx-52">
+    <Header />
     <template v-for="(message, index) in messages">
       <!-- person - start -->
       <div
@@ -17,7 +17,6 @@
             class="w-full h-full object-cover object-center"
           />
         </div>
-
         <div>
           <div
             class="text-indigo-500 md:text-lg font-bold text-center sm:text-left"
@@ -37,9 +36,16 @@
 </template>
 
 <script>
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
+
 export default {
   data() {
-    return {}
+    return {
+      loginUser: {
+        name: '',
+        userImg: '',
+      },
+    }
   },
   computed: {
     messages() {
@@ -48,7 +54,15 @@ export default {
   },
   methods: {},
   async mounted() {
+    const auth = getAuth()
+
     await this.$store.dispatch('chat/getMessages')
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.loginUser.name = user.displayName
+        this.loginUser.userImg = auth.currentUser.photoURL
+      }
+    })
   },
 }
 </script>
