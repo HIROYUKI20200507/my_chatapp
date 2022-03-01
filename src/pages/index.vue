@@ -4,27 +4,27 @@
     <template v-for="(message, index) in messages">
       <!-- person - start -->
       <div
-        class="flex flex-col sm:flex-row items-center gap-2 md:gap-4 m-3"
+        class="flex flex-col items-center gap-2 m-3 sm:flex-row md:gap-4"
         :key="index"
       >
         <div
-          class="w-16 h-16 bg-gray-100 rounded-full overflow-hidden shadow-lg"
+          class="w-16 h-16 overflow-hidden bg-gray-100 rounded-full shadow-lg"
         >
           <img
             :src="message.image"
             loading="lazy"
             alt="Photo by christian ferrer"
-            class="w-full h-full object-cover object-center"
+            class="object-cover object-center w-full h-full"
           />
         </div>
         <div>
           <div
-            class="text-indigo-500 md:text-lg font-bold text-center sm:text-left"
+            class="font-bold text-center text-indigo-500 md:text-lg sm:text-left"
           >
             {{ message.name }}
           </div>
           <p
-            class="text-gray-500 text-sm md:text-base text-center sm:text-left"
+            class="text-sm text-center text-gray-500 md:text-base sm:text-left"
           >
             {{ message.message }}
           </p>
@@ -43,7 +43,7 @@ export default {
     return {
       loginUser: {
         name: '',
-        userImg: '',
+        img: '',
       },
     }
   },
@@ -52,7 +52,6 @@ export default {
       return this.$store.state.chat.messages
     },
   },
-  methods: {},
   async mounted() {
     const auth = getAuth()
 
@@ -60,7 +59,7 @@ export default {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         this.loginUser.name = user.displayName
-        this.loginUser.userImg = auth.currentUser.photoURL
+        this.loginUser.img = auth.currentUser.photoURL
       }
     })
   },
