@@ -187,7 +187,7 @@
 </template>
 
 <script>
-import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
 export default {
   data() {
