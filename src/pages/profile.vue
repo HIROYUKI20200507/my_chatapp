@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-10 mx-52">
+  <div class="md:mt-10 md:mx-52">
     <Header />
     <div>
       <div class="md:grid md:grid-cols-3 md:gap-6">

@@ -1,53 +1,53 @@
 <template>
-  <div class="bg-white py-6 sm:py-8 lg:py-12">
-    <div class="max-w-screen-2xl px-4 md:px-8 mx-auto">
+  <div class="py-6 bg-white sm:py-8 lg:py-12">
+    <div class="px-4 mx-auto max-w-screen-2xl md:px-8">
       <h2
-        class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-8"
+        class="mb-4 text-2xl font-bold text-center text-gray-800 lg:text-3xl md:mb-8"
       >
         Login
       </h2>
 
-      <form class="max-w-lg border rounded-lg mx-auto">
+      <form class="max-w-lg mx-auto border rounded-lg">
         <div class="flex flex-col gap-4 p-4 md:p-8">
           <!-- <div>
             <label
               for="email"
-              class="inline-block text-gray-800 text-sm sm:text-base mb-2"
+              class="inline-block mb-2 text-sm text-gray-800 sm:text-base"
               >Email</label
             >
             <input
               name="email"
-              class="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
+              class="w-full px-3 py-2 text-gray-800 transition duration-100 border rounded outline-none bg-gray-50 focus:ring ring-indigo-300"
             />
           </div>
 
           <div>
             <label
               for="password"
-              class="inline-block text-gray-800 text-sm sm:text-base mb-2"
+              class="inline-block mb-2 text-sm text-gray-800 sm:text-base"
               >Password</label
             >
             <input
               name="password"
-              class="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
+              class="w-full px-3 py-2 text-gray-800 transition duration-100 border rounded outline-none bg-gray-50 focus:ring ring-indigo-300"
             />
           </div>
 
           <button
-            class="block bg-gray-800 hover:bg-gray-700 active:bg-gray-600 focus-visible:ring ring-gray-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"
+            class="block px-8 py-3 text-sm font-semibold text-center text-white transition duration-100 bg-gray-800 rounded-lg outline-none hover:bg-gray-700 active:bg-gray-600 focus-visible:ring ring-gray-300 md:text-base"
           >
             Log in
           </button>
 
-          <div class="flex justify-center items-center relative">
-            <span class="h-px bg-gray-300 absolute inset-x-0"></span>
-            <span class="bg-white text-gray-400 text-sm relative px-4"
+          <div class="relative flex items-center justify-center">
+            <span class="absolute inset-x-0 h-px bg-gray-300"></span>
+            <span class="relative px-4 text-sm text-gray-400 bg-white"
               >Log in with social</span
             >
           </div>
 
           <button
-            class="flex justify-center items-center bg-blue-500 hover:bg-blue-600 active:bg-blue-700 focus-visible:ring ring-blue-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 gap-2 px-8 py-3"
+            class="flex items-center justify-center gap-2 px-8 py-3 text-sm font-semibold text-center text-white transition duration-100 bg-blue-500 rounded-lg outline-none hover:bg-blue-600 active:bg-blue-700 focus-visible:ring ring-blue-300 md:text-base"
           >
             <svg
               class="w-5 h-5 shrink-0"
@@ -67,7 +67,7 @@
           </button> -->
 
           <a
-            class="flex justify-center items-center bg-white hover:bg-gray-100 active:bg-gray-200 border border-gray-300 focus-visible:ring ring-gray-300 text-gray-800 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 gap-2 px-8 py-3"
+            class="flex items-center justify-center gap-2 px-8 py-3 text-sm font-semibold text-center text-gray-800 transition duration-100 bg-white border border-gray-300 rounded-lg outline-none hover:bg-gray-100 active:bg-gray-200 focus-visible:ring ring-gray-300 md:text-base"
             @click="login"
           >
             <svg
@@ -100,12 +100,12 @@
           </a>
         </div>
 
-        <div class="flex justify-center items-center bg-gray-100 p-4">
-          <p class="text-gray-500 text-sm text-center">
+        <div class="flex items-center justify-center p-4 bg-gray-100">
+          <p class="text-sm text-center text-gray-500">
             Don't have an account?
             <a
               href="https://www.google.com/accounts/NewAccount?hl=ja"
-              class="text-indigo-500 hover:text-indigo-600 active:text-indigo-700 transition duration-100"
+              class="text-indigo-500 transition duration-100 hover:text-indigo-600 active:text-indigo-700"
               >Register</a
             >
           </p>
@@ -116,7 +116,12 @@
 </template>
 
 <script>
-import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  onAuthStateChanged,
+} from 'firebase/auth'
 
 export default {
   data() {
@@ -128,7 +133,15 @@ export default {
       const auth = getAuth()
 
       await signInWithPopup(auth, provider)
-      this.$router.push('/')
+
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          const uid = user.uid
+          console.log(uid)
+        } else {
+          console.log('失敗')
+        }
+      })
     },
   },
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-10 mx-52">
+  <div class="md:mt-10 md:mx-52">
     <Header />
     <template v-for="(message, index) in messages">
       <!-- person - start -->

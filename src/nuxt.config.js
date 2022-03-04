@@ -46,7 +46,7 @@ export default {
       },
     },
   },
-  // router: {
-  //   middleware: 'authenticated',
-  // },
+  router: {
+    middleware: 'authenticated',
+  },
 }
