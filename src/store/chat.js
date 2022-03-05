@@ -7,7 +7,7 @@ const googleProvider = new GoogleAuthProvider()
 export const state = () => {
   return {
     messages: [],
-    usr: '',
+    userToken: '',
   }
 }
 
@@ -18,8 +18,8 @@ export const mutations = {
   LOAD_MESSAGE(state, messages) {
     state.messages = messages
   },
-  SET_USER(state, payload) {
-    state.user = payload
+  SET_USER(state, uid) {
+    state.userToken = uid
   },
 }
 
@@ -42,14 +42,15 @@ export const actions = {
         .catch((err) => reject(err))
     })
   },
-  setUser({ commit }, payload) {
-    commit('setUser', payload)
+  setUser({ commit }, uid) {
+    commit('SET_USER', uid)
   },
 }
 
 // TODO:Vuexでストアの管理が常時できるようになったら実装
 export const getters = {
   isAuthenticated(state) {
-    return !!state.user
+    console.log(state.userToken)
+    return !!state.userToken
   },
 }

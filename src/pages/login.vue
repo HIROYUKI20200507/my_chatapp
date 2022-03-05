@@ -137,7 +137,8 @@ export default {
       onAuthStateChanged(auth, (user) => {
         if (user) {
           const uid = user.uid
-          console.log(uid)
+          this.$store.dispatch('chat/setUser', uid)
+          this.$router.push('/')
         } else {
           console.log('失敗')
         }
