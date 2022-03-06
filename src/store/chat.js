@@ -50,7 +50,6 @@ export const actions = {
 // TODO:Vuexでストアの管理が常時できるようになったら実装
 export const getters = {
   isAuthenticated(state) {
-    console.log(state.userToken)
     return !!state.userToken
   },
 }

@@ -37,6 +37,8 @@
 
 <script>
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { collection, query, where, getDocs } from 'firebase/firestore'
+import { db } from '../plugins/firebase'
 
 export default {
   data() {
@@ -53,6 +55,14 @@ export default {
     },
   },
   async mounted() {
+    const uid = this.$store.state.chat.userToken
+    const q = query(collection(db, 'messages'))
+
+    const querySnapshot = await getDocs(q)
+    querySnapshot.forEach((doc) => {
+      console.log(doc.id, ' => ', doc.data())
+    })
+
     const auth = getAuth()
 
     await this.$store.dispatch('chat/getMessages')

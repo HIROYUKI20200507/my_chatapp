@@ -26,6 +26,7 @@ export default {
         name: null,
         message: '',
         image: '',
+        uid: '',
       },
     }
   },
@@ -35,6 +36,7 @@ export default {
       if (user) {
         this.form.name = user.displayName
         this.form.image = auth.currentUser.photoURL
+        this.form.uid = this.$store.state.chat.userToken
       }
     })
   },
