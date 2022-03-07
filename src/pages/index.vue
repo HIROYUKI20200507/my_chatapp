@@ -1,7 +1,7 @@
 <template>
   <div class="md:mt-10 md:mx-52">
     <Header />
-    <template v-for="(message, index) in messages">
+    <template v-for="(message, index) in getMessages">
       <!-- person - start -->
       <div
         class="flex flex-col items-center gap-2 m-3 sm:flex-row md:gap-4"
@@ -43,28 +43,32 @@ import { db } from '../plugins/firebase'
 export default {
   data() {
     return {
+      getMessages: [],
       loginUser: {
         name: '',
         img: '',
       },
     }
   },
-  computed: {
-    messages() {
-      return this.$store.state.chat.messages
-    },
-  },
   async mounted() {
-    const uid = this.$store.state.chat.userToken
+    const name = this.$store.state.chat.user.userName
+    const email = this.$store.state.chat.user.userEmail
     const q = query(collection(db, 'messages'))
 
     const querySnapshot = await getDocs(q)
-    querySnapshot.forEach((doc) => {
-      console.log(doc.id, ' => ', doc.data())
+    await querySnapshot.forEach((doc) => {
+      if (doc.data().name === name && doc.data().email === email) {
+        const getChatData = {
+          name: doc.data().name,
+          image: doc.data().image,
+          email: doc.data().email,
+          message: doc.data().message,
+        }
+        this.getMessages.push(getChatData)
+      }
     })
 
     const auth = getAuth()
-
     await this.$store.dispatch('chat/getMessages')
     onAuthStateChanged(auth, (user) => {
       if (user) {

@@ -24,6 +24,7 @@ export default {
     return {
       form: {
         name: null,
+        email: '',
         message: '',
         image: '',
         uid: '',
@@ -35,8 +36,9 @@ export default {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         this.form.name = user.displayName
+        this.form.email = user.email
         this.form.image = auth.currentUser.photoURL
-        this.form.uid = this.$store.state.chat.userToken
+        this.form.uid = this.$store.state.chat.user.userId
       }
     })
   },

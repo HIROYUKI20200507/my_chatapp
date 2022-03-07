@@ -136,8 +136,12 @@ export default {
 
       onAuthStateChanged(auth, (user) => {
         if (user) {
-          const uid = user.uid
-          this.$store.dispatch('chat/setUser', uid)
+          const loginUser = {
+            userName: user.displayName,
+            userEmail: user.email,
+            userId: user.uid,
+          }
+          this.$store.dispatch('chat/setUser', loginUser)
           this.$router.push('/')
         } else {
           console.log('失敗')
