@@ -33,7 +33,7 @@
         </div>
         <button
           class="px-4 py-2 font-semibold text-gray-800 bg-white border border-gray-400 rounded shadow hover:bg-gray-100"
-          @click="messageDelete"
+          @click="messageDelete(message.id)"
         >
           delete
         </button>
@@ -59,24 +59,6 @@ export default {
     }
   },
   async mounted() {
-    const name = this.$store.state.chat.user.userName
-    const email = this.$store.state.chat.user.userEmail
-    const q = query(collection(db, 'messages'))
-
-    const querySnapshot = await getDocs(q)
-    await querySnapshot.forEach((doc) => {
-      if (doc.data().name === name && doc.data().email === email) {
-        const getChatData = {
-          name: doc.data().name,
-          image: doc.data().image,
-          email: doc.data().email,
-          message: doc.data().message,
-          id: doc.id,
-        }
-        this.getMessages.push(getChatData)
-      }
-    })
-
     const auth = getAuth()
     await this.$store.dispatch('chat/getMessages')
     onAuthStateChanged(auth, (user) => {
@@ -85,9 +67,35 @@ export default {
         this.loginUser.img = auth.currentUser.photoURL
       }
     })
+
+    this.getFirebaseDbMessages()
   },
   methods: {
-    messageDelete() {},
+    async getFirebaseDbMessages() {
+      const name = this.$store.state.chat.user.userName
+      const email = this.$store.state.chat.user.userEmail
+      const q = query(collection(db, 'messages'))
+      const querySnapshot = await getDocs(q)
+
+      await querySnapshot.forEach((doc) => {
+        if (doc.data().name === name && doc.data().email === email) {
+          const getChatData = {
+            name: doc.data().name,
+            image: doc.data().image,
+            email: doc.data().email,
+            message: doc.data().message,
+            id: doc.id,
+          }
+          this.getMessages.push(getChatData)
+        }
+      })
+    },
+    async messageDelete(id) {
+      this.getMessages = []
+
+      await deleteDoc(doc(db, 'messages', id))
+      await this.getFirebaseDbMessages()
+    },
   },
 }
 </script>
