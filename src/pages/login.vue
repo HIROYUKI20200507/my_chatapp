@@ -137,14 +137,14 @@ export default {
       onAuthStateChanged(auth, (user) => {
         if (user) {
           const loginUser = {
+            userId: user.uid,
             userName: user.displayName,
             userEmail: user.email,
-            userId: user.uid,
           }
           this.$store.dispatch('chat/setUser', loginUser)
           this.$router.push('/')
         } else {
-          console.log('失敗')
+          console.log('ログインに失敗しました')
         }
       })
     },
