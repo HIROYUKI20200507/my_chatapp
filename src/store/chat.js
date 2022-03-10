@@ -51,7 +51,6 @@ export const actions = {
   },
 }
 
-// TODO:Vuexでストアの管理が常時できるようになったら実装
 export const getters = {
   isAuthenticated(state) {
     return !!state.user.userId

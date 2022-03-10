@@ -40,12 +40,44 @@
       </div>
       <!-- person - end -->
     </template>
+    <div class="w-full">
+      <div class="flex items-center w-full py-2 border-b border-teal-500">
+        <input
+          class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
+          type="text"
+          v-model="form.message"
+          placeholder="投稿内容はこちらに記述してください"
+          aria-label="Full name"
+        />
+        <button
+          class="flex-shrink-0 px-2 py-1 text-sm text-white bg-teal-500 border-4 border-teal-500 rounded hover:bg-teal-700 hover:border-teal-700"
+          type="button"
+          @click.prevent="submit"
+        >
+          投稿
+        </button>
+      </div>
+    </div>
+    <div class="flex justify-end mt-10">
+      <a
+        class="px-4 py-2 font-semibold text-blue-700 bg-transparent border border-blue-500 rounded cursor-pointer hover:bg-blue-500 hover:text-white hover:border-transparent"
+        @click="logout"
+        >ログアウト</a
+      >
+    </div>
   </div>
 </template>
 
 <script>
-import { getAuth, onAuthStateChanged } from 'firebase/auth'
-import { collection, query, doc, deleteDoc, getDocs } from 'firebase/firestore'
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
+import {
+  collection,
+  query,
+  doc,
+  deleteDoc,
+  getDocs,
+  addDoc,
+} from 'firebase/firestore'
 import { db } from '../plugins/firebase'
 
 export default {
@@ -56,10 +88,27 @@ export default {
         name: '',
         img: '',
       },
+      form: {
+        name: null,
+        email: '',
+        message: '',
+        image: '',
+        uid: '',
+      },
     }
   },
   async mounted() {
     const auth = getAuth()
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.form.name = user.displayName
+        this.form.email = user.email
+        this.form.image = auth.currentUser.photoURL
+        this.form.uid = this.$store.state.chat.user.userId
+      }
+    })
+
     await this.$store.dispatch('chat/getMessages')
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -71,11 +120,23 @@ export default {
     this.getFirebaseDbMessages()
   },
   methods: {
+    async submit() {
+      const messagesCollectionRef = collection(db, 'messages')
+      addDoc(messagesCollectionRef, this.form)
+
+      await this.getFirebaseDbMessages()
+    },
+    async logout() {
+      const auth = getAuth()
+      signOut(auth)
+      this.$router.push('/login')
+    },
     async getFirebaseDbMessages() {
       const name = this.$store.state.chat.user.userName
       const email = this.$store.state.chat.user.userEmail
       const q = query(collection(db, 'messages'))
       const querySnapshot = await getDocs(q)
+      this.getMessages = []
 
       await querySnapshot.forEach((doc) => {
         if (doc.data().name === name && doc.data().email === email) {
