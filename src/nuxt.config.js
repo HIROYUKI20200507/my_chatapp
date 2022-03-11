@@ -32,7 +32,11 @@ export default {
 
   buildModules: ['@nuxt/postcss8'],
 
-  modules: ['@nuxtjs/axios'],
+  modules: ['@nuxtjs/axios', '@nuxtjs/gtm'],
+
+  gtm: {
+    id: 'GTM-KTQGFCW',
+  },
 
   axios: {
     proxy: true,
