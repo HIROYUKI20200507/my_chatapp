@@ -32,7 +32,15 @@ export default {
 
   buildModules: ['@nuxt/postcss8'],
 
-  modules: ['@nuxtjs/axios', '@nuxtjs/gtm'],
+  modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/gtm',
+    '@nuxtjs/google-gtag',
+  ],
+
+  'google-gtag': {
+    id: 'G-JMR8F2HY63',
+  },
 
   gtm: {
     id: 'GTM-KTQGFCW',

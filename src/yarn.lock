@@ -1799,6 +1799,16 @@
     consola "^2.15.3"
     defu "^5.0.0"
 
+"@nuxtjs/google-gtag@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/google-gtag/-/google-gtag-1.0.4.tgz#57562d8ec4c7694573e77edf72097da4a34b0d68"
+  integrity sha512-0Xgbx1uQ9pKeV2QdU9xoxJVdgH66qyGQJ0l8pzVxz5X476qvJunj6fbcjWk0gT+MEX/VOAhfT/zw0Z1z9q9oNg==
+
+"@nuxtjs/google-tag-manager@^2.3.2":
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/google-tag-manager/-/google-tag-manager-2.3.2.tgz#4f625225cba19912ccac2a0d4e3d7282c6684b38"
+  integrity sha512-i2rpIy6ekH1Wv2jAoEZ9q5e16jQM/OG4xgC9mi0yVFxnrXv2N93+ca04wWMESP6tekuy7FxpDdoN2vlrBLTqrw==
+
 "@nuxtjs/gtm@^2.4.0":
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/@nuxtjs/gtm/-/gtm-2.4.0.tgz#d7f5bb05b0306c564674831eab17b4e25cfdc1f6"
