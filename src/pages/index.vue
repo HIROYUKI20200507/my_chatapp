@@ -1,8 +1,46 @@
 <template>
-  <div class="md:mt-10 md:mx-52">
+  <v-app id="inspire">
+    <v-system-bar app>
+      <v-spacer></v-spacer>
+
+      <v-icon>mdi-square</v-icon>
+
+      <v-icon>mdi-circle</v-icon>
+
+      <v-icon>mdi-triangle</v-icon>
+    </v-system-bar>
+
     <Header />
-    <template v-for="(message, index) in getMessages">
-      <!-- person - start -->
+
+    <v-main>
+      <v-container class="px-6 py-8" fluid>
+        <v-row>
+          <v-col v-for="(message, index) in getMessages" :key="index" cols="12">
+            <v-card>
+              <v-subheader>{{ card }}</v-subheader>
+
+              <v-list two-line>
+                <v-list-item>
+                  <v-list-item-avatar color="grey darken-1">
+                  </v-list-item-avatar>
+
+                  <v-list-item-content>
+                    <v-list-item-title>{{ message }}</v-list-item-title>
+
+                    <v-list-item-subtitle>
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                      Nihil repellendus distinctio similique
+                    </v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-main>
+  </v-app>
+  <!-- <template v-for="(message, index) in getMessages">
       <div
         class="flex flex-col items-center justify-between px-5 py-3 m-3 border border-gray-400 shadow sm:flex-row md:gap-4"
         :key="index"
@@ -38,7 +76,6 @@
           delete
         </button>
       </div>
-      <!-- person - end -->
     </template>
     <div class="w-full">
       <div class="flex items-center w-full py-2 border-b border-teal-500">
@@ -65,7 +102,7 @@
         >ログアウト</a
       >
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
@@ -83,6 +120,7 @@ import { db } from '../plugins/firebase'
 export default {
   data() {
     return {
+      cards: ['Today', 'Yesterday'],
       getMessages: [],
       loginUser: {
         name: '',

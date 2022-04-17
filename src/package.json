@@ -16,6 +16,7 @@
     "@nuxtjs/google-gtag": "^1.0.4",
     "@nuxtjs/google-tag-manager": "^2.3.2",
     "@nuxtjs/gtm": "^2.4.0",
+    "@nuxtjs/vuetify": "^1.12.3",
     "core-js": "^3.19.3",
     "firebase": "^9.6.7",
     "firebase-tools": "^10.2.1",
