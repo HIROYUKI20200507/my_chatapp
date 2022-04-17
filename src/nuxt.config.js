@@ -30,13 +30,9 @@ export default {
 
   components: true,
 
-  buildModules: ['@nuxt/postcss8'],
+  buildModules: ['@nuxt/postcss8', '@nuxtjs/vuetify'],
 
-  modules: [
-    '@nuxtjs/axios',
-    '@nuxtjs/gtm',
-    '@nuxtjs/google-gtag',
-  ],
+  modules: ['@nuxtjs/axios', '@nuxtjs/gtm', '@nuxtjs/google-gtag'],
 
   'google-gtag': {
     id: 'G-JMR8F2HY63',
